@@ -16,6 +16,6 @@
     <Link href="css/default.css" rel="stylesheet" type="text/css"></Link>
 </head>
 <body>
-<h1>Hello This is a Demonstration Java Application</h1>
+<h1>This is a Demonstration Java Application for DevOps Students </h1>
 </body>
 </html>
