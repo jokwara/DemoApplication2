@@ -29,7 +29,7 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="#"><header12>eManagement Application Suite Of the University of X </header12></a></li>
+                <li><a href="#"><header12>eManagement Application Suite for DevOps Candidates </header12></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a data-toggle="modal" href="#registerModal"><span class="glyphicon glyphicon-user"></span> <mainLeft>Sign Up</mainLeft></a></li>
