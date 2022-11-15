@@ -1,36 +1,44 @@
 pipeline {
-    agent any
+    agent { label 'LinuxEquity'}
     stages {
-      stage("Cloning GitHub Repository"){
+      stage("Clone Repo"){
         steps{
           git url: 'https://github.com/jokwara/DemoApplication2.git', branch: 'main'
          }
 
         }
 
-     stage("Building Code"){
+     stage("Build Code"){
          steps{
           sh  "mvn clean install"
        }
      }
 
-     stage("Testing Code"){
+     stage("Test Code"){
          steps{
           sh  "/bin/echo Testing The Code"
        }
      }
 
-    stage("Deploying Code To Tomcat"){
+    stage("Deploy Code"){
          steps{
           deploy adapters: [tomcat9(credentialsId: 'dca3650a-d624-4869-8902-490854e996ca', path: '', url: 'http://192.168.1.244:9999')], contextPath: null, war: '*/**.war'
        }
      }
 
-   stage("Code Quality Checking"){
-     waitForQualityGate abortPipeline: false, credentialsId: 'real-sonar-token'
+   stage('Analyse Code'){
+      environment {
+          SCANNER_HOME = tool 'SonarQubeScanner4'
+      }
+    steps{
+       withSonarQubeEnv(installationName: 'sonarQube', credentialsId: 'real-sonar-token') {
+       sh 'mvn sonar:sonar'
+       }
+    }
+
    }
 
-  stage("Code Coverage"){
+  stage("Cover Code"){
          steps{
           jacoco()
        }
