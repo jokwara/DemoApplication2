@@ -26,7 +26,7 @@ pipeline {
        }
      }
 
-   stage('Analyse Code'){
+   stage('Analyze Code'){
       environment {
           SCANNER_HOME = tool 'SonarQubeScanner4'
       }
