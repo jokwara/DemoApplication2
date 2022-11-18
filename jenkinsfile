@@ -17,7 +17,9 @@ pipeline {
      stage("Test Code"){
          steps{
           sh  "/bin/echo Testing The Code"
+          sh " mvn test"
        }
+       
      }
 
     stage("Deploy Code"){
