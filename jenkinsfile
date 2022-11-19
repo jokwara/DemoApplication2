@@ -13,27 +13,27 @@ pipeline {
           sh  "mvn clean install"
        }
      }
-
      stage("Test Code"){
          steps{
           sh  "/bin/echo Testing The Code"
           sh " mvn test"
        }
-       
+
      }
 
     stage("Deploy Code"){
          steps{
-          deploy adapters: [tomcat9(credentialsId: 'dca3650a-d624-4869-8902-490854e996ca', path: '', url: 'http://192.168.1.244:9999')], contextPath: null, war: '*/**.war'
+          //deploy adapters: [tomcat9(credentialsId: 'dca3650a-d624-4869-8902-490854e996ca', path: '', url: 'http://192.168.1.244:9999')], contextPath: null, war: '*/**.war'
+          deploy adapters: [tomcat9(credentialsId: 'tomcatadmin_credentials', path: '', url: 'http://192.168.1.234:9999')], contextPath: null, war: '*/**.war'
        }
      }
 
    stage('Analyze Code'){
       environment {
-          SCANNER_HOME = tool 'SonarQubeScanner4'
+          SCANNER_HOME = tool 'SonarQube'
       }
     steps{
-       withSonarQubeEnv(installationName: 'sonarQube', credentialsId: 'real-sonar-token') {
+       withSonarQubeEnv(installationName: 'sonarQube', credentialsId: 'SonarToken') {
        sh 'mvn sonar:sonar'
        }
     }
